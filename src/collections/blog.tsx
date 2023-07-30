@@ -18,10 +18,10 @@ type BlogEntryText = {
     value: string;
 }
 
-export const productsCollection = buildCollection<Blog>({
+export const blogCollection = buildCollection<Blog>({
     name: "Blogs",
     singularName: "Blog",
-    path: "Blog",
+    path: "blog",
     icon: "Blog",
     group: "Blogs",
     permissions: ({ authController, user }) => ({
