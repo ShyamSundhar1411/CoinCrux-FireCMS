@@ -9,7 +9,7 @@ import "typeface-rubik";
 import "@fontsource/ibm-plex-mono";
 
 import { firebaseConfig } from "./firebase-config.ts";
-import { blogCollection } from "./collections/blog.tsx";
+import { NewsCollection, blogCollection } from "./collections/blog.tsx";
 
 export default function App() {
 
@@ -43,7 +43,7 @@ export default function App() {
     return <FirebaseCMSApp
         name={"Coin Crux CMS"}
         authentication={myAuthenticator}
-        collections={[blogCollection]}
+        collections={[NewsCollection]}
         firebaseConfig={firebaseConfig}
     />;
 }

@@ -18,6 +18,22 @@ type BlogEntryText = {
     value: string;
 }
 
+type News = {
+    coinColor: number,
+    coinDescription: string,
+    coinHeading: string,
+    coinImage: string,
+    coinName: string,
+    coinType: string,
+    createdAt: Date,
+    createdBy: string,
+    marketsCard: string,
+    topicTitle: string,
+    totalDislikes: string[];
+    totalLikes: string[];
+
+}
+
 export const blogCollection = buildCollection<Blog>({
     name: "Blogs",
     singularName: "Blog",
@@ -66,5 +82,87 @@ export const blogCollection = buildCollection<Blog>({
             dataType: "string",
             columnWidth: 300
         },
+    }
+});
+
+export const NewsCollection = buildCollection<News>({
+    name: "News",
+    singularName: "News",
+    path: "News",
+    icon : "News",
+    group: "News",
+    permissions: ({ authController, user }) => ({
+        read: true,
+        edit: true,
+        create: true,
+        delete: true
+    }),
+    subcollections: [
+        localeCollection
+    ],
+    properties:{
+        coinColor:{
+            name: "Coin Color",
+            validation: { required: true },
+            dataType: "number"
+        },
+        coinDescription:{
+            name: "Coin Description",
+            validation: {required:true},
+            dataType: "string",
+            columnWidth:500,
+        },
+        coinHeading:{
+            name: "Coin Heading",
+            validation: {required:true},
+            dataType: "string",
+        },
+        coinImage: buildProperty({ // The `buildProperty` method is a utility function used for type checking
+            name: "Coin Image",
+            dataType: "string",
+            storage: {
+                storagePath: "images",
+                acceptedFiles: ["image/*"]
+            }
+        }),
+        coinType:{
+            name:"Coin Type",
+            dataType: "string"
+        },
+        coinName:{
+            name:"Coin Name",
+            dataType:"string",
+        },
+        createdAt:buildProperty( {
+            name: "Created on",
+            dataType: "date",
+            autoValue: "on_create"
+        }),
+        createdBy:{
+            name: "Created By",
+            dataType: "string",
+        },
+        marketsCard:buildProperty({
+            name: "Markets Card",
+            dataType:"string",
+        }),
+        topicTitle:{
+            name:"Topic Title",
+            dataType:"string",
+        },
+        totalLikes:buildProperty({
+            name: "Likes",
+            dataType:"array",
+            of:{
+                dataType:"string"
+            }
+        }),
+        totalDislikes:buildProperty({
+            name: "Dislikes",
+            dataType:"array",
+            of:{
+                dataType:"string"
+            }
+        }),
     }
 });
