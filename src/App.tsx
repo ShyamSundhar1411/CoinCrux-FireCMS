@@ -9,7 +9,7 @@ import "typeface-rubik";
 import "@fontsource/ibm-plex-mono";
 
 import { firebaseConfig } from "./firebase-config.ts";
-import { NewsCollection, blogCollection } from "./collections/blog.tsx";
+import { NewsCollection } from "./collections/blog.tsx";
 
 export default function App() {
 
