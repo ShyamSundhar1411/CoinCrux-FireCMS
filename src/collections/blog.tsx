@@ -7,11 +7,10 @@ type News = {
   coinDescription: string;
   coinHeading: string;
   coinImage: string;
-  coinName: string;
-  coinType: string;
   createdAt: Date;
   createdBy: string;
   marketsCard: boolean;
+  assetName: string;
   topicTitle: string;
   category: string;
   totalDislikes: string[];
@@ -43,10 +42,6 @@ export const NewsCollection = buildCollection<News>({
       dataType: "string",
       columnWidth: 500,
     },
-    category: {
-      name: "Category",
-      dataType: "string",
-    },
     coinImage: buildProperty({
       name: "Coin Image",
       dataType: "string",
@@ -55,9 +50,19 @@ export const NewsCollection = buildCollection<News>({
         acceptedFiles: ["image/*"],
       },
     }),
-    coinType: {
-      name: "Coin Type",
+    category: buildProperty({
+      name:'Category',
+      validation: { required: true },
       dataType: "string",
+    }),
+    assetName: buildProperty({
+      name:'Asset Name',
+      validation: { required: true },
+      dataType: "string",
+    }),
+    marketsCard: {
+      name: "Markets Card",
+      dataType: "boolean",
     },
     createdAt: buildProperty({
       name: "Created on",
@@ -66,18 +71,12 @@ export const NewsCollection = buildCollection<News>({
     }),
     createdBy: {
       name: "Created By",
-      dataType: "string",
-    },
-    marketsCard: {
-      name: "Markets Card",
-      dataType: "boolean",
-    },
-    coinName: {
-      name: "Coin Name",
+      validation: { required: true },
       dataType: "string",
     },
     topicTitle: {
       name: "Topic Title",
+      validation: { required: true },
       dataType: "string",
     },
     totalLikes: {
