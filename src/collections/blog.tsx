@@ -71,6 +71,8 @@ export const NewsCollection = buildCollection<News>({
         Economy:"Economy",
         Banking:"Banking",
         World:"World",
+        India:"India",
+        Regulations: "Regulations",
       }
     }),
     assetName: buildProperty({
