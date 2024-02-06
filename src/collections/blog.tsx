@@ -1,5 +1,4 @@
-import React from "react";
-import { buildCollection, buildProperty } from "firecms";
+import { EnumValues, buildCollection, buildProperty } from "firecms";
 import { localeCollection } from "./locales.tsx";
 
 // Define the News type
@@ -12,7 +11,7 @@ type News = {
   marketsCard: boolean;
   assetName: string;
   topicTitle: string;
-  category: string;
+  category: string[];
   totalDislikes: string[];
   totalLikes: string[];
 };
@@ -32,51 +31,80 @@ export const NewsCollection = buildCollection<News>({
   subcollections: [localeCollection],
   properties: {
     coinHeading: {
-      name: "Coin Heading",
+      name: "Title",
       validation: { required: true },
       dataType: "string",
     },
     coinDescription: {
-      name: "Coin Description",
+      name: "Summary",
       validation: { required: true },
       dataType: "string",
       columnWidth: 500,
     },
     coinImage: buildProperty({
-      name: "Coin Image",
+      name: "Image",
       dataType: "string",
+      validation: { required: true },
       storage: {
         storagePath: "images",
         acceptedFiles: ["image/*"],
       },
     }),
     category: buildProperty({
-      name:'Category',
+      name: 'Category',
       validation: { required: true },
-      dataType: "string",
-      enumValues:{
-        Altcoins: "Altcoins",
-        Analytics: "Analytics",
-        Banking: "Banking",
-        Bitcoin: "Bitcoin",
-        Blockchain: "Blockchain",
-        Economy: "Economy",
-        Ethereum: "Ethereum",
-        Exchange: "Exchange",
-        Finance: "Finance",
-        GameFi: "GameFi",
-        India: "India",
-        Markets: "Markets",
-        Metaverse: "Metaverse",
-        Mining: "Mining",
-        Others: "Others",
-        Regulations: "Regulations",
-        Security: "Security",
-        World: "World"
-            }
-    }),
+      dataType: "array",
+      of: {
+        dataType: "string",
+      
+  
+      
+     
+      enumValues: {
+          "Banking": "Banking",
+          "Economy": "Economy",
+          "Environment": "Environment",
+          "Industry": "Industry",
+          "Infra": "Infra",
+          "IPO": "IPO",
+          "Markets": "Markets",
+          "Politics": "Politics",
+          "Science": "Science",
+          "Sports": "Sports",
+          "Stats": "Stats",
+          "Wealth": "Wealth",
+          "Bitcoin": "Bitcoin",
+          "Ethereum": "Ethereum",
+          "Analytics": "Analytics",
+          "Exchange": "Exchange",
+          // "Markets": "Markets",
+          "Metaverse": "Metaverse",
+          "Blockchain": "Blockchain",
+          "GameFi": "GameFi",
+          "Finance": "Finance",
+          "Others": "Others",
+          "Mining": "Mining",
+          "Security": "Security",
+          // "Economy": "Economy",
+          "World": "World",
+          "Legal": "Legal",
+          "Altcoins": "Altcoins"
+      },
+    },
+
+      ui: {
+        widget: "select",
+        showEnumIcon: true,
+      },
+  }),
+  
+  
+  
+  
+   
+  
     assetName: buildProperty({
-      name:'Asset Name',
+      name: "Asset Name",
       validation: { required: true },
       dataType: "string",
     }),
@@ -93,10 +121,16 @@ export const NewsCollection = buildCollection<News>({
       name: "Created By",
       validation: { required: true },
       dataType: "string",
+      enumValues: {
+        Samridhi: "Samridhi Jain",
+        Yash: "Yash Jain",
+        Noopur: "Noopur Kumari",
+        Samiksha: "Samiksha Dhaka",
+        Anushka: "Ansuhka Verma",
+      },
     },
     topicTitle: {
       name: "Topic Title",
-      validation: { required: true },
       dataType: "string",
     },
     totalLikes: {
